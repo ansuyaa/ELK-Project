@@ -38,10 +38,10 @@
           ],
           "type": "text",
           "status": "Stable",
-          "mode": "markdown",
-          "content": "If you have a field with a timestamp in it, you can set a time filter using the control in the navigation bar. You'll need to click the cog icon to configure the field that your timestamp is in.",
+          "mode": "html",
+          "content": "<a href=\"http://127.0.0.1/#/dashboard/file/blah.json\">blah page</a>", 
           "style": {},
-          "title": "Have a timestamp somewhere?"
+          "title": "Next Page"
         },
         {
           "error": false,
