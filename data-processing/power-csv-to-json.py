@@ -12,6 +12,38 @@ def convert(csvFileName, fieldNames):
 		json.dump(row, jsonFile)
 		jsonFile.write('\n')
 
+def convert_nested(csvFileName, dates):
+	jsonFileName = csvFileName.split('.')[0] + '.json'
+	jsonFile = open(jsonFileName, 'w')
+	n_dates = len(dates)
+
+	with open(csvFileName) as f:
+		lis=[line.split() for line in f]
+
+		for x in lis:
+			l = x[0].split(",")
+			row = dict()
+			i_row = 1
+			j_row = n_dates + 1
+			row['ID'] = l[0]
+			usage = []
+			users = []
+			while i_row <= n_dates :
+				usage_dict = dict()
+				users_dict = dict()
+				usage_dict["date"] = dates[i_row - 1]
+				usage_dict["amount"] = l[i_row]
+				users_dict["date"] = dates[i_row - 1]
+				users_dict["total"] = l[j_row]
+				usage.append(usage_dict)
+				users.append(users_dict)
+				i_row = i_row + 1
+				j_row = j_row + 1
+			row['usage'] = usage
+			row['users'] = users
+			json.dump(row, jsonFile)
+			jsonFile.write('\n')
+
 
 fieldNames = ( 'ID', 'Unspecified' , 'Commercial_Unspecified' , 'Hotel' , 'Mixed_Commercial' ,
 	'Mixed_Commercial/Residential' , 'Department_Store' , 'Neighborhood_Store' , 'Low_Office' ,
@@ -30,6 +62,6 @@ convert(csvFileName, fieldNames)
 #convert string to JSON datetime format
 #str(datetime(2006,1,1)).replace(' ','T')
 #'2006-01-01T00:00:00'
-
 dates = [ str(datetime(year,month,1)).replace(' ','T') for year in [2006,2007,2008, 2009, 2010, 2011] for month in [1,2,3,4,5,6,7,8,9,10,11,12] ]
-
+csvFileName = 'CCSC_dataset_and_demo_analysis/Consumption-1.csv'
+convert_nested(csvFileName, dates)
