@@ -26,21 +26,16 @@ def convert_nested(csvFileName, dates):
 			i_row = 1
 			j_row = n_dates + 1
 			row['ID'] = l[0]
-			usage = []
-			users = []
+			usage_users = []
 			while i_row <= n_dates :
-				usage_dict = dict()
-				users_dict = dict()
-				usage_dict["date"] = dates[i_row - 1]
-				usage_dict["amount"] = l[i_row]
-				users_dict["date"] = dates[i_row - 1]
-				users_dict["total"] = l[j_row]
-				usage.append(usage_dict)
-				users.append(users_dict)
+				usage_users_dict = dict()
+				usage_users_dict["date"] = dates[i_row - 1]
+				usage_users_dict["usage_amount"] = l[i_row]
+				usage_users_dict["users"] = l[j_row]
+				usage_users.append(usage_users_dict)
 				i_row = i_row + 1
 				j_row = j_row + 1
-			row['usage'] = usage
-			row['users'] = users
+			row['usage'] = usage_users
 			json.dump(row, jsonFile)
 			jsonFile.write('\n')
 
