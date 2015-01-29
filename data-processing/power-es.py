@@ -5,14 +5,18 @@ es = ElasticSearch('http://localhost:9200')
 
 ##set mappings for timestamp, nested object for consumption type 
 
-es.create_index('power')
+# es.create_index('power')
 
 mapping_consumption = {
     "consumption" : {
-        "_timestamp" : {
-            "enabled" : "true",
-            "path" : "usage.date"
-      	},
+##how to set timestamp?
+        #  "_timestamp" : {
+        #      "enabled" : "true",
+        #      "path" : "usage.date"
+        # },
+      	# "_id" : {
+      	# 	"path" : "ID"
+      	# },
         "properties" : {
             "usage" : {
                 "type" : "nested",
@@ -23,10 +27,12 @@ mapping_consumption = {
                     "users" : {"type": "integer"}
                 }
             }
+            #,
+            # "ID" : { "type" : "string" }
         }
-
     }
 }
+
 
 es.put_mapping('power', 'consumption', mapping_consumption)
 print es.get_mapping('power', 'consumption')
@@ -45,3 +51,4 @@ bulk_data =[ ast.literal_eval(jsonDoc) for jsonDoc in open(jsonFileName).readlin
 es.bulk_index('power', 'consumption', bulk_data, id_field = 'ID')
 
 #es.delete_index('power')
+
