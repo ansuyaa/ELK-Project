@@ -4,7 +4,8 @@ es = ElasticSearch('http://127.0.0.1:9200')
 
 
 ##set mappings 
-es.create_index('all-power')
+#es.delete_index('all-power')
+#es.create_index('all-power')
 
 
 ##{"date": "2006-01-01", "usage_amount": "337481.6", "users": "680", 
@@ -102,6 +103,7 @@ es.bulk_index('all-power', 'temp', bulk_data)
 
 jsonFileName = 'CCSC_dataset_and_demo_analysis/full-data/Consumption_Blockgroup_Sharable_Detail_with_Temperatures/all_usage-flat.json'
 bulk_data =[ ast.literal_eval(jsonDoc) for jsonDoc in open(jsonFileName).readlines()]
-es.bulk_index('all-power', 'usage', bulk_data)
+for i in [0,100000, 200000,300000]:
+	es.bulk_index('all-power', 'usage', bulk_data[i:i+100000])
 
 #es.delete_index('all-power')
