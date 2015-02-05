@@ -9,6 +9,9 @@ def convert(csvFileName, fieldNames):
 
 	reader = csv.DictReader(csvFile, fieldNames)
 	for row in reader:
+		row['location'] = row['lat'] + "," + row['long']
+		del row['lat']
+		del row['long']
 		json.dump(row, jsonFile)
 		jsonFile.write('\n')
 
@@ -27,8 +30,9 @@ def convert_nested_flattened_2(csvFileName, dates):
 			while i_row <= n_dates :
 				row = dict()
 				row['ID'] = l[0]
-				row['long'] = l[1]
-				row['lat'] = l[2]
+				row['location'] = l[2] + "," + l[1]
+				# row['long'] = l[1]
+				# row['lat'] = l[2]
 				row["date"] = dates[i_row - 3]
 				row["usage_amount"] = l[i_row]
 				row["users"] = l[j_row]
@@ -53,8 +57,9 @@ def convert_nested_flattened_3(csvFileName, dates):
 			while i_row <= n_dates :
 				row = dict()
 				row['ID'] = l[0]
-				row['long'] = l[1]
-				row['lat'] = l[2]
+				row['location'] = l[2] + "," + l[1]
+				# row['long'] = l[1]
+				# row['lat'] = l[2]
 				row["date"] = dates[i_row - 3]
 				row["min_temp"] = l[i_row]
 				row["max_temp"] = l[j_row]
