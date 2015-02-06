@@ -1,0 +1,47 @@
+{
+  "type": "area",
+  "params": {
+    "shareYAxis": true,
+    "addTooltip": true,
+    "addLegend": true,
+    "mode": "stacked"
+  },
+  "aggs": [
+    {
+      "id": 1,
+      "type": "avg",
+      "schema": "metric",
+      "params": {
+        "field": "max_temp"
+      }
+    },
+    {
+      "id": 2,
+      "type": "date_histogram",
+      "schema": "segment",
+      "params": {
+        "field": "date",
+        "interval": "month",
+        "min_doc_count": 1,
+        "extended_bounds": {}
+      }
+    },
+    {
+      "id": 3,
+      "type": "avg",
+      "schema": "metric",
+      "params": {
+        "field": "mean_temp"
+      }
+    },
+    {
+      "id": 4,
+      "type": "avg",
+      "schema": "metric",
+      "params": {
+        "field": "min_temp"
+      }
+    }
+  ],
+  "listeners": {}
+}

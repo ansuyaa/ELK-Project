@@ -1,0 +1,47 @@
+{
+  "type": "line",
+  "params": {
+    "addLegend": true,
+    "addTooltip": true,
+    "shareYAxis": true,
+    "spyPerPage": 10
+  },
+  "aggs": [
+    {
+      "id": 1,
+      "type": "max",
+      "schema": "metric",
+      "params": {
+        "field": "usage_amount"
+      }
+    },
+    {
+      "id": 2,
+      "type": "date_histogram",
+      "schema": "segment",
+      "params": {
+        "field": "date",
+        "interval": "month",
+        "min_doc_count": 1,
+        "extended_bounds": {}
+      }
+    },
+    {
+      "id": 3,
+      "type": "sum",
+      "schema": "metric",
+      "params": {
+        "field": "users"
+      }
+    },
+    {
+      "id": 4,
+      "type": "min",
+      "schema": "metric",
+      "params": {
+        "field": "usage_amount"
+      }
+    }
+  ],
+  "listeners": {}
+}

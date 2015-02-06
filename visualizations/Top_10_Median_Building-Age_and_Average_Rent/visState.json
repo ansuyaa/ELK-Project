@@ -1,0 +1,61 @@
+{
+  "type": "pie",
+  "params": {
+    "shareYAxis": true,
+    "addTooltip": true,
+    "addLegend": true,
+    "isDonut": false,
+    "spyPerPage": 10
+  },
+  "aggs": [
+    {
+      "id": 1,
+      "type": "count",
+      "schema": "metric",
+      "params": {}
+    },
+    {
+      "id": 2,
+      "type": "terms",
+      "schema": "segment",
+      "params": {
+        "field": "median_year_built",
+        "size": 10,
+        "order": "desc",
+        "exclude": {
+          "flags": []
+        },
+        "include": {
+          "flags": []
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "range",
+      "schema": "segment",
+      "params": {
+        "field": "average_rent",
+        "ranges": [
+          {
+            "from": 0,
+            "to": 1000
+          },
+          {
+            "from": 1000,
+            "to": 2000
+          },
+          {
+            "from": 2000,
+            "to": 3000
+          },
+          {
+            "from": 3000,
+            "to": 5000
+          }
+        ]
+      }
+    }
+  ],
+  "listeners": {}
+}

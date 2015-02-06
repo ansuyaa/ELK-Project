@@ -1,0 +1,78 @@
+{
+  "type": "histogram",
+  "params": {
+    "shareYAxis": true,
+    "addTooltip": true,
+    "addLegend": true,
+    "mode": "stacked",
+    "spyPerPage": 10
+  },
+  "aggs": [
+    {
+      "id": 1,
+      "type": "count",
+      "schema": "metric",
+      "params": {}
+    },
+    {
+      "id": 2,
+      "type": "range",
+      "schema": "segment",
+      "params": {
+        "field": "average_family_income",
+        "ranges": [
+          {
+            "from": 0,
+            "to": 20000
+          },
+          {
+            "from": 20000,
+            "to": 50000
+          },
+          {
+            "from": 50000,
+            "to": 100000
+          },
+          {
+            "from": 100000,
+            "to": 300000
+          },
+          {
+            "from": 300000,
+            "to": 500000
+          },
+          {
+            "from": 500000
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "range",
+      "schema": "group",
+      "params": {
+        "field": "average_rent",
+        "ranges": [
+          {
+            "from": 0,
+            "to": 1000
+          },
+          {
+            "from": 1000,
+            "to": 2000
+          },
+          {
+            "from": 2000,
+            "to": 3000
+          },
+          {
+            "from": 3000,
+            "to": 5000
+          }
+        ]
+      }
+    }
+  ],
+  "listeners": {}
+}

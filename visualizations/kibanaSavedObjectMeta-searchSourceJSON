@@ -1,0 +1,9 @@
+{
+  "index": "all-power",
+  "query": {
+    "query_string": {
+      "query": "_type:census"
+    }
+  },
+  "filter": []
+}
